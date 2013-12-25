@@ -1,6 +1,4 @@
-CC
+CC - ComputerCraft
 ==
-
-ComputerCraft Things
 
 My [mibac138] CC Misc Programs :)
