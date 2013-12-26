@@ -4,7 +4,7 @@ local canClr = false
 local done = false
 local InstallationProgress = 1
 local InstallationSteps = {[1] = {name = "Starting Installer"}; [2] = {name = "Creating Files"}; [3] = {name = "Ending Installation"};}
-local files = {[1] = {name = "Client"; data = [[print("test1")]]}; [2] = {name = "API"; data= [[print("test2")]]};}
+local files = {[1] = {name = "Client"; data = [[print("This is still in Dev version! Code isnt avalible yet!]]}; [2] = {name = "API"; data= [[print("This is still in Dev version! Code isnt avalible yet!]]};}
 local x, y = term.getSize()
 if term.isColor then canClr = true else canClr = false end
 if not x == 51 and not y == 19 then if(canClr) then term.setTextColor(colors.red) print("Error! Unsupported monitor size!") else print("Error! Unsupported monitor size!") end end
