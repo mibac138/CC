@@ -1,4 +1,3 @@
-local InstallerVersion = "0.1 DEV"
 local installDir = "/MNet"
 local dupliFilesDir = "/Conflicted_Files"
 local canClr = false
