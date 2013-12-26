@@ -2,59 +2,91 @@ local GitHubHttp = "http://github.com"
 local GitHubSourceHttp = "http://raw.github.com"
 local GitHubUserName = "mibac138"
 local GitHubRepoName = "CC"
+local GitHubFileName
 
--- Getters And Setters
+-- Just For Sure
 
--- GitHubUserName
+if not http then
+ error("HTTP API Not Enabled! GitHubAPI Disabled!")
+else
 
-function setGitHubUserName(_GitHubUserName)
- local GitHubUserName = tostring(_GitHubUserName)
-end
+ -- Helper Functions
 
-function getGitHubUserName()
- return GitHubUserName
-end
+ local function getWebsite(WebsiteHttp)
+  Website = http.get(WebsiteHttp)
+  return Website
+ end
 
--- GitHubHttpAddress
+ -- Getters And Setters
 
-function setGitHubHttpAddress(_GitHubHttp)
- local _GitHubHttp = tostring(_GitHubHttp)
- 
- if not string.sub(_GitHubHttp, 1, 7) == "http://" then
-  _GitHubHttp = "http://" .. _GitHubHttp
+ -- GitHubUserName
+
+ function setGitHubUserName(_GitHubUserName)
+  local GitHubUserName = tostring(_GitHubUserName)
  end
  
- GitHubHttp = _GitHubHttp
-end
+ function getGitHubUserName()
+  return GitHubUserName
+ end
 
-function getGitHubHttpAddress()
- return GitHubHttp
-end
+ -- GitHubHttpAddress
 
--- GitHubSourceHttpAddress
-
-function setGitHubSourceHttpAddress(_GitHubSourceHttp)
- local _GitHubSourceHttp = tostring(_GitHubSourceHttp)
+ function setGitHubHttpAddress(_GitHubHttp)
+  local _GitHubHttp = tostring(_GitHubHttp)
  
- if not string.sub(_GitHubSourceHttp, 1, 7) == "http://" then
-  _GitHubSourceHttp = "http://" .. _GitHubSourceHttp
+  if not string.sub(_GitHubHttp, 1, 7) == "http://" then
+   _GitHubHttp = "http://" .. _GitHubHttp
+  end
+ 
+  GitHubHttp = _GitHubHttp
+ end
+
+ function getGitHubHttpAddress()
+  return GitHubHttp
+ end
+
+ -- GitHubSourceHttpAddress
+
+ function setGitHubSourceHttpAddress(_GitHubSourceHttp)
+  local _GitHubSourceHttp = tostring(_GitHubSourceHttp)
+ 
+  if not string.sub(_GitHubSourceHttp, 1, 7) == "http://" then
+   _GitHubSourceHttp = "http://" .. _GitHubSourceHttp
+  end
+ 
+  GitHubSourceHttp = _GitHubSourceHttp
+ end
+
+ function getGitHubSourceHttpAddress()
+  return GitHubSourceHttp
+ end
+
+ -- GitHubRepo[sitory]Name
+
+ function setGitHubRepoName(_GitHubRepoName)
+  GitHubRepoName = tostring(_GitHubRepoName)
+ end
+
+ function getGitHubRepoName()
+  return GitHubRepoName
+ end
+
+ setGitHubRepositoryName = setGitHubRepoName
+
+ -- Functionality Functions
+
+ function GitHubFileDownload(_GitHubHttp, _GitHubSourceHttp, _GitHubUserName, _GitHubRepoName, _GitHubFileName)
+  local _GitHubHttp, _GitHubSourceHttp, _GitHubUserName, _GitHubRepoName, _GitHubFileName = tostring(_GitHubHttp) or GitHubHttp, tostring(_GitHubSourceHttp) or GitHubSourceHttp, tostring(_GitHubUserName) or GitHubUserName, tostring(_GitHubRepoName) or GitHubRepoName, tostring(_GitHubFileName) or GitHubFileName
+ 
+  local Website = http.get(_GitHubSourceHttp .. "/" .. _GitHubUserName .. "/" .. _GitHubRepoName .. "/" .. _GitHubFileName)
+  print(_GitHubSourceHttp .. "/" .. _GitHubUserName .. "/" .. _GitHubRepoName .. "/" .. _GitHubFileName) -- Testing
+ 
+  local WebsiteData = Website.readAll()
+  return WebsiteData
  end
  
- GitHubSourceHttp = _GitHubSourceHttp
 end
 
-function getGitHubSourceHttpAddress()
- return GitHubSourceHttp
-end
 
--- GitHubRepo[sitory]Name
 
-function setGitHubRepoName(_GitHubRepoName)
- GitHubRepoName = tostring(_GitHubRepoName)
-end
 
-function getGitHubRepoName()
- return GitHubRepoName
-end
-
-setGitHubRepositoryName = setGitHubRepoName
