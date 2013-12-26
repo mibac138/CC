@@ -1,3 +1,2 @@
 MNet Installer For Clients
 MNet Installer For Servers
-MNet Universal Installer
