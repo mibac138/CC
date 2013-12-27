@@ -28,4 +28,4 @@
   },
 }
 -- Version 0 means that program is under construction (any version not published)
--- Version 0.XXX means that its Beta version
+-- Version 0.XXX means that its Beta version (ex. 3.571 = 0.3571)
