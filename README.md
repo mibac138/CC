@@ -1,4 +1,4 @@
 CC - ComputerCraft
 ==
 
-* My [mibac138] CC Misc Programs :) *
+* My [mibac138] CC Misc Programs :)
