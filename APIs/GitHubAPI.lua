@@ -1,3 +1,4 @@
+local Version = 1.0
 local GitHubURL = "https://github.com"
 local GitHubSourceURL = "https://raw.github.com"
 local GitHubUserName = "mibac138"
@@ -22,7 +23,7 @@ else
  -- GitHubUserName
 
  function setGitHubUserName(_GitHubUserName)
-  local GitHubUserName = tostring(_GitHubUserName)
+  GitHubUserName = tostring(_GitHubUserName)
  end
  
  function getGitHubUserName()
@@ -32,13 +33,15 @@ else
  -- GitHubURLAddress
 
  function setGitHubURLAddress(_GitHubURL)
-  local _GitHubURL = tostring(_GitHubURL)
+  _GitHubURL = tostring(_GitHubURL)
  
   if not string.sub(_GitHubURL, 1, 7) == "http://" then
    _GitHubURL = "http://" .. _GitHubURL
   end
- 
-  GitHubURL = _GitHubURL
+  
+  if not _GitHubURL == (nil or "" or "http://" or "https://") then  
+   GitHubURL = _GitHubURL
+  end
  end
 
  function getGitHubURLAddress()
@@ -47,14 +50,16 @@ else
 
  -- GitHubSourceURLAddress
 
- function setGitHubSourceURLAddress(_GitHubSourceURL)
-  local _GitHubSourceURL = tostring(_GitHubSourceURL)
+ function setGitHubSourceURLAddress(_GitHubSourceURL) 
+  _GitHubSourceURL = tostring(_GitHubSourceURL)
  
   if not string.sub(_GitHubSourceURL, 1, 7) == "http://" then
    _GitHubSourceURL = "http://" .. _GitHubSourceURL
   end
- 
-  GitHubSourceURL = _GitHubSourceURL
+  
+  if not _GitHubURL == (nil or "" or "http://" or "https://") then  
+   GitHubSourceURL = _GitHubSourceURL
+  end
  end
 
  function getGitHubSourceURLAddress()
@@ -64,7 +69,9 @@ else
  -- GitHubRepo[sitory]Name
 
  function setGitHubRepoName(_GitHubRepoName)
-  GitHubRepoName = tostring(_GitHubRepoName)
+  if not _GitHubURL == (nil or "") then  
+   GitHubRepoName = _GitHubRepoName
+  end
  end
 
  function getGitHubRepoName()
@@ -72,11 +79,14 @@ else
  end
 
  setGitHubRepositoryName = setGitHubRepoName
+ getGitHubRepositoryName = getGitHubRepoName
 
  -- GitHubFileName
  
  function setGitHubFileName(_GitHubFileName)
-  GitHubFileName = tostring(_GitHubFileName)
+  if not _GitHubFileName == (nil or "") then  
+   GitHubFileName = _GitHubFileName
+  end
  end
 
  function getGitHubFileName()
@@ -85,9 +95,11 @@ else
  
  -- Functionality Functions
 
- function GitHubFileDownload(_GitHubSourceURL, _GitHubUserName, _GitHubRepoName, _GitHubFileName)
-  local _GitHubSourceURL, _GitHubUserName, _GitHubRepoName, _GitHubFileName = _GitHubSourceURL or GitHubSourceURL, _GitHubUserName or GitHubUserName, _GitHubRepoName or GitHubRepoName, _GitHubFileName or GitHubFileName
- 
+ function GitHubFileDownload( _GitHubFileName, _GitHubSourceURL, _GitHubUserName, _GitHubRepoName)
+  local _GitHubFileName, _GitHubSourceURL, _GitHubUserName, _GitHubRepoName = _GitHubFileName or GitHubFileName, _GitHubSourceURL or GitHubSourceURL, _GitHubUserName or GitHubUserName, _GitHubRepoName or GitHubRepoName
+  
+  if _GitHubFileName == (nil or "") then error("GitHubAPI: REQUIRED arg [1] - Git Hub File Name" ,0) end
+  
   local Website = getWebsite(_GitHubSourceURL .. "/" .. _GitHubUserName .. "/" .. _GitHubRepoName .. "/master/" .. _GitHubFileName)
   if Website == false then error("GitHubAPI: Cannot connect to website!", 0) end
   
@@ -95,7 +107,7 @@ else
   return WebsiteData
  end
  
- function GitHubFileDownloadIf(p1, p2, p3, _GitHubSourceURL, _GitHubUserName, _GitHubRepoName, _GitHubFileName)
+ function GitHubFileDownloadIf(p1, p2, p3, _GitHubFileName, _GitHubSourceURL, _GitHubUserName, _GitHubRepoName)
   local _GitHubSourceURL, _GitHubUserName, _GitHubRepoName, _GitHubFileName, canDownload = _GitHubSourceURL or GitHubSourceURL, _GitHubUserName or GitHubUserName, _GitHubRepoName or GitHubRepoName, _GitHubFileName or GitHubFileName, false
  
   if p3 == "==" and p1 == p2 then canDownload = true
