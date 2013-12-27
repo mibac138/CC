@@ -27,3 +27,5 @@
     ["Package"]="APIs",
   },
 }
+-- Version 0 means that program is under construction (any version not published)
+-- Version 0.XXX means that its Beta version
