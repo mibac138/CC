@@ -18,7 +18,7 @@
     ["Package"]="MNet",
   },  
   ["githubapi"]={
-    ["GitURL"]="https://raw.github.com/darkrising/darkprograms/darkprograms/api/dark.lua",
+    ["GitURL"]="https://raw.github.com/mibac138/APIs/GitHubAPI.lua",
     ["Version"]=0.7,
     ["Type"]="api",
     ["Name"]="GitHubAPI",
