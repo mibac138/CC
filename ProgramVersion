@@ -1,0 +1,29 @@
+{
+  ["server"]={
+    ["GitURL"]="https://raw.github.com/mibac138/MNet/server.lua",
+    ["Version"]=0,
+    ["Type"]="program",
+    ["Name"]="MNet Server",
+    ["Description"]="MNet Server",
+    ["Author"]="mibac138",
+    ["Package"]="MNet",
+  },
+  ["client"]={
+   ["GitURL"]="https://raw.github.com/mibac138/MNet/client.lua",
+    ["Version"]=0,
+    ["Type"]="program",
+    ["Name"]="MNet Client",
+    ["Description"]="MNet Client",
+    ["Author"]="mibac138",
+    ["Package"]="MNet",
+  },  
+  ["githubapi"]={
+    ["GitURL"]="https://raw.github.com/darkrising/darkprograms/darkprograms/api/dark.lua",
+    ["Version"]=0.7,
+    ["Type"]="api",
+    ["Name"]="GitHubAPI",
+    ["Description"]="API used in all my [mibac138] programs with updater",
+    ["Author"]="mibac138",
+    ["Package"]="APIs",
+  },
+}
