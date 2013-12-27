@@ -4,7 +4,7 @@ local GitHubUserName = "mibac138"
 local GitHubRepoName = "CC"
 local GitHubFileName
 
--- Just For Sure
+
 
 if not http then
  error("GitHubAPI: HTTP API Not Enabled! GitHubAPI Disabled!", 0)
