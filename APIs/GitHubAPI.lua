@@ -1,5 +1,5 @@
-local GitHubHttp = "http://github.com"
-local GitHubSourceHttp = "http://raw.github.com"
+local GitHubHttp = "https://github.com"
+local GitHubSourceHttp = "https://raw.github.com"
 local GitHubUserName = "mibac138"
 local GitHubRepoName = "CC"
 local GitHubFileName
@@ -7,7 +7,7 @@ local GitHubFileName
 -- Just For Sure
 
 if not http then
- error("HTTP API Not Enabled! GitHubAPI Disabled!")
+ error("GitHubAPI: HTTP API Not Enabled! GitHubAPI Disabled!", 12)
 else
 
  -- Helper Functions
@@ -73,13 +73,22 @@ else
 
  setGitHubRepositoryName = setGitHubRepoName
 
+ -- GitHubFileName
+ 
+ function setGitHubFileName(_GitHubFileName)
+  GitHubFileName = tostring(_GitHubFileName)
+ end
+
+ function getGitHubFileName()
+  return GitHubFileName
+ end
+ 
  -- Functionality Functions
 
- function GitHubFileDownload(_GitHubHttp, _GitHubSourceHttp, _GitHubUserName, _GitHubRepoName, _GitHubFileName)
-  local _GitHubHttp, _GitHubSourceHttp, _GitHubUserName, _GitHubRepoName, _GitHubFileName = tostring(_GitHubHttp) or GitHubHttp, tostring(_GitHubSourceHttp) or GitHubSourceHttp, tostring(_GitHubUserName) or GitHubUserName, tostring(_GitHubRepoName) or GitHubRepoName, tostring(_GitHubFileName) or GitHubFileName
+ function GitHubFileDownload(_GitHubSourceHttp, _GitHubUserName, _GitHubRepoName, _GitHubFileName)
+  local _GitHubSourceHttp, _GitHubUserName, _GitHubRepoName, _GitHubFileName = _GitHubSourceHttp or GitHubSourceHttp, _GitHubUserName or GitHubUserName, _GitHubRepoName or GitHubRepoName, _GitHubFileName or GitHubFileName
  
-  local Website = http.get(_GitHubSourceHttp .. "/" .. _GitHubUserName .. "/" .. _GitHubRepoName .. "/" .. _GitHubFileName)
-  print(_GitHubSourceHttp .. "/" .. _GitHubUserName .. "/" .. _GitHubRepoName .. "/" .. _GitHubFileName) -- Testing
+  local Website = http.get(_GitHubSourceHttp .. "/" .. _GitHubUserName .. "/" .. _GitHubRepoName .. "/master/" .. _GitHubFileName)
  
   local WebsiteData = Website.readAll()
   return WebsiteData
