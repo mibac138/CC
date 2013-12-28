@@ -19,7 +19,7 @@
   },  
   ["githubapi"]={
     ["GitURL"]="https://raw.github.com/mibac138/APIs/GitHubAPI.lua",
-    ["Version"]=1.0,
+    ["Version"]=1.05,
     ["Type"]="api",
     ["Name"]="GitHubAPI",
     ["Description"]="API used in all my [mibac138] programs with updater",
