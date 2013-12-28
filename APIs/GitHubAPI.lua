@@ -1,4 +1,4 @@
-local Version = 1.0
+local Version = 1.05
 local GitHubURL = "https://github.com"
 local GitHubSourceURL = "https://raw.github.com"
 local GitHubUserName = "mibac138"
