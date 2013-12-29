@@ -1,4 +1,4 @@
-local Version = 0
+local Version = 0.1
 
 -- Functions
 
