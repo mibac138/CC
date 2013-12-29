@@ -64,7 +64,7 @@
     ["Package"] = "APIs",
   },
   ["rc4encryptionapi"] = {
-    ["GitURL"] = "https://raw.github.com/mibac138/APIs/RC4%20Encryption%20API.lua",
+    ["GitURL"] = "https://raw.github.com/mibac138/APIs/RC4API.lua",
     ["Version"] = 1.0,
     ["Type"] = "api",
     ["Name"] = "RC4 Encryption API",
