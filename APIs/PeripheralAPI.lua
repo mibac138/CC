@@ -25,10 +25,19 @@ function getPeripherals()
 end
 
 function getPeripheral(PeripheralName)
+ for _,s in ipairs(rs.getSides()) do
+  if PeripheralName == s then
+   if peripheral.isPresent(s) then
+    PeripheralName = peripheral.getType(s)
+    return s, PeripheralName
+   end
+  end
+ end
+ 
  peripherals = {}
  
  for _,s in ipairs(rs.getSides()) do
-  if peripheral.isPresent(s) and peripheral.getType() == PeripheralName then
+  if peripheral.isPresent(s) and peripheral.getType(s) == PeripheralName then
    table.insert(peripherals, s)
   end
  end
