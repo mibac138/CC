@@ -1,4 +1,4 @@
-local installDir = "/MNet"
+local installDir = "/Mibac138/MNet"
 local dupliFilesDir = "/Conflicted_Files"
 local canClr = false
 local done = false
