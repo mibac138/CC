@@ -1,8 +1,9 @@
-local Version = 1.05
+local Version = 1.1
 local GitHubURL = "https://github.com"
 local GitHubSourceURL = "https://raw.github.com"
 local GitHubUserName = "mibac138"
 local GitHubRepoName = "CC"
+local GitHubBranchName = "master"
 local GitHubFileName
 
 
@@ -101,23 +102,39 @@ else
   return GitHubFileName
  end
  
+ -- GitHubBranchName
+ 
+ function setGitHubBranchName(_GitHubBranchName)
+  if not (_GitHubBranchName == nil and _GitHubBranchName == "") then
+   GitHubBranchName = _GitHubBranchName
+   return true
+  end
+  return false
+ end
+
+ function getGitHubBranchName()
+  return GitHubBranchName
+ end
+ 
  -- Functionality Functions
 
- function GitHubFileDownload( _GitHubFileName, _GitHubSourceURL, _GitHubUserName, _GitHubRepoName)
-  local _GitHubFileName, _GitHubSourceURL, _GitHubUserName, _GitHubRepoName = _GitHubFileName or GitHubFileName, _GitHubSourceURL or GitHubSourceURL, _GitHubUserName or GitHubUserName, _GitHubRepoName or GitHubRepoName
+ function GitHubFileDownload( _GitHubFileName, _GitHubSourceURL, _GitHubUserName, _GitHubRepoName, _GitHubBranchName)
+  local _GitHubFileName, _GitHubSourceURL, _GitHubUserName, _GitHubRepoName, _GitHubBranchName = _GitHubFileName or GitHubFileName, _GitHubSourceURL or GitHubSourceURL, _GitHubUserName or GitHubUserName, _GitHubRepoName or GitHubRepoName, _GitHubBranchName or GitHubBranchName
   
   if _GitHubFileName == nil or _GitHubFileName == "" then error("GitHubAPI: REQUIRED arg [1] - Git Hub File Name" ,0) end
   
-  local Website = getWebsite(_GitHubSourceURL .. "/" .. _GitHubUserName .. "/" .. _GitHubRepoName .. "/master/" .. _GitHubFileName)
+  local Website = getWebsite(_GitHubSourceURL .. "/" .. _GitHubUserName .. "/" .. _GitHubRepoName .. "/" .. _GitHubBranchName .. "/" .. _GitHubFileName)
   if Website == false then error("GitHubAPI: Cannot connect to website!", 0) end
   
   local WebsiteData = Website.readAll()
   return WebsiteData
  end
  
- function GitHubFileDownloadIf(p1, p2, p3, _GitHubFileName, _GitHubSourceURL, _GitHubUserName, _GitHubRepoName)
-  local _GitHubSourceURL, _GitHubUserName, _GitHubRepoName, _GitHubFileName, canDownload = _GitHubSourceURL or GitHubSourceURL, _GitHubUserName or GitHubUserName, _GitHubRepoName or GitHubRepoName, _GitHubFileName or GitHubFileName, false
- 
+ function GitHubFileDownloadIf(p1, p2, p3, _GitHubFileName, _GitHubSourceURL, _GitHubUserName, _GitHubRepoName, _GitHubBranchName)
+  local _GitHubSourceURL, _GitHubUserName, _GitHubRepoName, _GitHubFileName, _GitHubBranchName, canDownload = _GitHubSourceURL or GitHubSourceURL, _GitHubUserName or GitHubUserName, _GitHubRepoName or GitHubRepoName, _GitHubFileName or GitHubFileName, _GitHubBranchName or GitHubBranchName , false
+  
+  -- TODO: Check if p1, p2 and p3 isnt null
+  
   if p3 == "==" and p1 == p2 then canDownload = true
   elseif p3 == ">=" and p1 >= p2 then canDownload = true
   elseif p3 == "<=" and p1 <= p2 then canDownload = true
@@ -127,7 +144,7 @@ else
   end
   
   if canDownload == true then
-   local Website = getWebsite(_GitHubSourceURL .. "/" .. _GitHubUserName .. "/" .. _GitHubRepoName .. "/master/" .. _GitHubFileName)
+   local Website = getWebsite(_GitHubSourceURL .. "/" .. _GitHubUserName .. "/" .. _GitHubRepoName .. "/" .. _GitHubBranchName .. "/" .. _GitHubFileName)
    if Website == false then error("GitHubAPI: Cannot connect to website!", 0) end
    
    local WebsiteData = Website.readAll()
@@ -137,10 +154,10 @@ else
   end
  end
  
- function GitHubFileDownloadIfExistsUpdate(_FileWhereToSave, _FileName, _FileVersion, _GitHubSourceURL, _GitHubUserName, _GitHubRepoName)
+ function GitHubFileDownloadIfExistsUpdate(_FileWhereToSave, _FileName, _FileVersion, _GitHubSourceURL, _GitHubUserName, _GitHubRepoName, _GitHubBranchName)
   if not _FileWhereToSave then error("GitHubAPI: REQUIRED arg [1] - File Where To Save", 0) end
   
-  local _GitHubSourceURL, _GitHubUserName, _GitHubRepoName, _FileName, _FileVersion = _GitHubSourceURL or GitHubSourceURL, _GitHubUserName or GitHubUserName, _GitHubRepoName or GitHubRepoName, _FileName or GitHubFileName, _FileVersion or 1.0
+  local _GitHubSourceURL, _GitHubUserName, _GitHubRepoName, _GitHubBranchName, _FileName, _FileVersion = _GitHubSourceURL or GitHubSourceURL, _GitHubUserName or GitHubUserName, _GitHubRepoName or GitHubRepoName, _GitHubBranchName or GitHubBranchName , _FileName or GitHubFileName, _FileVersion or 1.0
   
   local VersionCheck = getWebsite(_GitHubSourceURL .. "/" .. _GitHubUserName .. "/" .. _GitHubRepoName .. "/master/ProgramVersions")
   
