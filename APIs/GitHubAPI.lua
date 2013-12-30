@@ -159,7 +159,7 @@ else
   
   local _GitHubSourceURL, _GitHubUserName, _GitHubRepoName, _GitHubBranchName, _FileName, _FileVersion = _GitHubSourceURL or GitHubSourceURL, _GitHubUserName or GitHubUserName, _GitHubRepoName or GitHubRepoName, _GitHubBranchName or GitHubBranchName , _FileName or GitHubFileName, _FileVersion or 1.0
   
-  local VersionCheck = getWebsite(_GitHubSourceURL .. "/" .. _GitHubUserName .. "/" .. _GitHubRepoName .. "/master/ProgramVersions")
+  local VersionCheck = getWebsite(_GitHubSourceURL .. "/" .. _GitHubUserName .. "/" .. _GitHubRepoName .. "/" .. _GitHubBranchName .. "/ProgramVersions")
   
   if VersionCheck == false then error("GitHubAPI: Cannot connect to website!", 0) end
   
