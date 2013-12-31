@@ -4,7 +4,9 @@ local GitHubSourceURL = "https://raw.github.com"
 local GitHubUserName = "mibac138"
 local GitHubRepoName = "CC"
 local GitHubBranchName = "master"
+local GitHubVersionsFileName = "Versions"
 local GitHubFileName
+
 
 
 
@@ -116,6 +118,19 @@ else
   return GitHubBranchName
  end
  
+  -- GitHubVersionsFileName
+ 
+ function setGitHubVersionsFileName(_GitHubVersionsFileName)
+  if not (_GitHubVersionsFileName == nil and _GitHubVersionsFileName == "") then
+   GitGitHubVersionsFileName = _GitHubVersionsFileName
+   return true
+  end
+  return false
+ end
+
+ function getGitHubVersionsFileName()
+  return GitHubBranchName
+ end
  -- Functionality Functions
 
  function GitHubFileDownload( _GitHubFileName, _GitHubSourceURL, _GitHubUserName, _GitHubRepoName, _GitHubBranchName)
@@ -154,18 +169,18 @@ else
   end
  end
  
- function GitHubFileDownloadIfExistsUpdate(_FileWhereToSave, _FileName, _FileVersion, _GitHubSourceURL, _GitHubUserName, _GitHubRepoName, _GitHubBranchName)
+ function GitHubFileDownloadIfExistsUpdate(_FileWhereToSave, _FileName, _FileVersion, _GitHubVersionsFileName, _GitHubSourceURL, _GitHubUserName, _GitHubRepoName, _GitHubBranchName)
   if not _FileWhereToSave then error("GitHubAPI: REQUIRED arg [1] - File Where To Save", 0) end
   
-  local _GitHubSourceURL, _GitHubUserName, _GitHubRepoName, _GitHubBranchName, _FileName, _FileVersion = _GitHubSourceURL or GitHubSourceURL, _GitHubUserName or GitHubUserName, _GitHubRepoName or GitHubRepoName, _GitHubBranchName or GitHubBranchName , _FileName or GitHubFileName, _FileVersion or 1.0
+  local _GitHubSourceURL, _GitHubUserName, _GitHubRepoName, _GitHubBranchName, __GitHubVersionsFileName, _FileName, _FileVersion = _GitHubSourceURL or GitHubSourceURL, _GitHubUserName or GitHubUserName, _GitHubRepoName or GitHubRepoName, _GitHubBranchName or GitHubBranchName, _GitHubVersionsFileName or GitHubVersionsFileName, _FileName or GitHubFileName, _FileVersion or 1.0
   
-  local VersionCheck = getWebsite(_GitHubSourceURL .. "/" .. _GitHubUserName .. "/" .. _GitHubRepoName .. "/" .. _GitHubBranchName .. "/ProgramVersions")
+  local VersionCheck = getWebsite(_GitHubSourceURL .. "/" .. _GitHubUserName .. "/" .. _GitHubRepoName .. "/" .. _GitHubBranchName .. "/" .. _GitHubVersionsFileName)
   
   if VersionCheck == false then error("GitHubAPI: Cannot connect to website!", 0) end
   
   VersionCheck = textutils.unserialize(VersionCheck.readAll())
   
-  if not VersionCheck[tostring(_FileName)] then return false, "File isnt existing in ProgramVersions db file (" .. _GitHubSourceURL .. "/" .. _GitHubUserName .. "/" .. _GitHubRepoName .. "/master/ProgramVersions)" end
+  if not VersionCheck[tostring(_FileName)] then return false, "File isnt existing in " .. _GitHubVersionsFileName .. " db file (" .. _GitHubSourceURL .. "/" .. _GitHubUserName .. "/" .. _GitHubRepoName .. "/" .. _GitHubBranchName .. "/" .. _GitHubVersionsFileName)" end
   
   if VersionCheck[tostring(_FileName)].Version > _FileVersion then -- Just For Sure (tostring)
    
