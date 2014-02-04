@@ -1,3 +1,7 @@
+--[[
+ My, mibac138 GitHub API.
+]]
+
 local Version = 1.1
 local GitHubURL = "https://github.com"
 local GitHubSourceURL = "https://raw.github.com"
