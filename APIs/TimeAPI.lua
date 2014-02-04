@@ -1,6 +1,6 @@
 local format = "^2:^1 ^4 ^3 ^5"
 local website = "http://www.timeapi.org/"
-local timezone = "utc/"
+local TZ = "utc/" -- Time Zone
 local websiteParams = "now?format={[%22sec%22]=%25S,%20[%22time%22]=%22%25H:%25M%22,%20[%22day%22]=%25d,%20[%22month%22]=%22%25b%22,%20[%22year%22]=%25Y}"
 
 if not http then error("TimeAPI: HTTP API Not Enabled! TimeAPI Disabled!", 0) end
@@ -12,8 +12,10 @@ if not http then error("TimeAPI: HTTP API Not Enabled! TimeAPI Disabled!", 0) en
 function setTimeFormat(_timeFormat)
  if str then
   format = _timeFormat
+  
   return true
  end
+ 
  return false
 end
 
@@ -26,8 +28,26 @@ end
 function setWebsite(_website)
  if website then
   website = _website
+  
   return true
  end
+ 
+ return false
+end
+
+function getWebsite()
+ return website
+end
+
+--Website params
+
+function setWebsiteParams(_websiteParams)
+ if _websiteParams then
+  websiteParams = websiteParams
+  
+  return true
+ end
+ 
  return false
 end
 
