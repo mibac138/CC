@@ -1,17 +1,24 @@
-local format = "^2:^1 ^4 ^3 ^5"
+local format = "2:1 4 3 5"
 local website = "http://www.timeapi.org/"
 local TZ = "utc/" -- Time Zone
 local websiteParams = "now?format={[%22sec%22]=%25S,%20[%22time%22]=%22%25H:%25M%22,%20[%22day%22]=%25d,%20[%22month%22]=%22%25b%22,%20[%22year%22]=%25Y}"
+local timeout = -1
 
 if not http then error("TimeAPI: HTTP API Not Enabled! TimeAPI Disabled!", 0) end
 
--- Getters And Setters
+ --[[ Getters And Setters ]]--
 
--- TimeFormat
+--+ TimeFormat +--
 
-function setTimeFormat(_timeFormat)
- if str then
-  format = _timeFormat
+function setTimeFormat(formatTable)
+ if formatTable then
+  format = ""
+  
+  for i=1, #formatTable do
+   if type(formatTable[i]) == "number" then
+    format = format .. formatTable[i]
+   end
+  end
   
   return true
  end
@@ -23,7 +30,7 @@ function getTimeFormat()
  return format
 end
 
--- Website
+--+ Website +--
 
 function setWebsite(_website)
  if website then
@@ -39,7 +46,7 @@ function getWebsite()
  return website
 end
 
---Website params
+--+ Website params +--
 
 function setWebsiteParams(_websiteParams)
  if _websiteParams then
@@ -51,16 +58,32 @@ function setWebsiteParams(_websiteParams)
  return false
 end
 
--- Functions
+--+ Timeout +--
 
-function string:Time()
- data = data or get(true)
+function setTimeout(_timeout)
+ if _timeout and type(_timeout) == "number" then
+  timeout = _timeout
  
- for i=1, #data do
-  str = str:gsub("%^"..tostring(i), data[i])
+ return true
  end
  
- return str
+ return false
+end
+
+function getTimeout()
+ return timeout
+end
+
+--[[ Functions ]]--
+
+function string:Time(data, _website, _timezone, _websiteParams, timeout)
+ data = data or get(true, _website, _timezone, _websiteParams, timeout)
+ 
+ for i=1, #data do
+  self = self:gsub("%"..tostring(i), data[i])
+ end
+ 
+ return self
 end
 
 function get(tableFormatIsInNumbers, _website, _timezone, _websiteParams)
