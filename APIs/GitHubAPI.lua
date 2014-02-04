@@ -19,11 +19,14 @@ else
 
  --[[ Helper Functions ]]--
 
- local function getWebsite(WebsiteURL)
-  Website = http.get(WebsiteURL)
-  
-  return Website or false
-  end
+local function getWebsite(_website)
+ if not http then return false, "HTTP API Not Enabled!" end
+ website = _website or website
+ ok, data = pcall(function(website) return http.get(website).readAll() end)
+ 
+ return ok, data
+end
+
  
  --[[ Getters And Setters ]]--
 
