@@ -28,7 +28,7 @@
   
   ["githubapi"] = {
     ["GitURL"] = "https://raw.github.com/mibac138/APIs/GitHubAPI.lua",
-    ["Version"] = 1.1,
+    ["Version"] = 1.2,
     ["State"] = "DONE",
     ["Type"] = "api",
     ["Name"] = "GitHubAPI",
