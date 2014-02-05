@@ -159,7 +159,7 @@ end
 function GitHubFileDownload( _GitHubFileName, _GitHubSourceURL, _GitHubUserName, _GitHubRepoName, _GitHubBranchName)
  local _GitHubFileName, _GitHubSourceURL, _GitHubUserName, _GitHubRepoName, _GitHubBranchName = _GitHubFileName or GitHubFileName, _GitHubSourceURL or GitHubSourceURL, _GitHubUserName or GitHubUserName, _GitHubRepoName or GitHubRepoName, _GitHubBranchName or GitHubBranchName
  
- if _GitHubFileName == nil or _GitHubFileName == "" then error("GitHubAPI: REQUIRED arg [1] - Git Hub File Name" ,0) end
+ if not _GitHubFileName or _GitHubFileName == "" then error("GitHubAPI: REQUIRED arg [1] - Git Hub File Name" ,0) end
  
  local ok, data = getWebsite(_GitHubSourceURL .. "/" .. _GitHubUserName .. "/" .. _GitHubRepoName .. "/" .. _GitHubBranchName .. "/" .. _GitHubFileName)
  
@@ -203,11 +203,11 @@ function GitHubFileDownloadIfExistsUpdate(_FileWhereToSave, _FileName, _FileVers
  
  data = textutils.unserialize(data)
  
- if not data[tostring(_FileName)] then return false, "File isnt existing in " .. _GitHubVersionsFileName .. " db file (" .. _GitHubSourceURL .. "/" .. _GitHubUserName .. "/" .. _GitHubRepoName .. "/" .. _GitHubBranchName .. "/" .. _GitHubVersionsFileName)" end
+ if not data[tostring(_FileName)] then return ok, data end
  
  if data[tostring(_FileName)].Version > _FileVersion then
   
-  local ok, data = getWebsite(VersionCheck[_FileName].GitURL)
+  local ok, data = getWebsite(data[_FileName].GitURL)
   
   if not ok then return ok, data end
   
