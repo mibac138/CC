@@ -8,7 +8,7 @@ local GitHubSourceURL = "https://raw.github.com"
 local GitHubUserName = "mibac138"
 local GitHubRepoName = "CC"
 local GitHubBranchName = "master"
-local GitHubVersionsFileName = "Versions"
+local GitHubVersionsFileName = "Versions.lua"
 local GitHubFileName
 
 
@@ -159,7 +159,7 @@ end
 function GitHubFileDownload( _GitHubFileName, _GitHubSourceURL, _GitHubUserName, _GitHubRepoName, _GitHubBranchName)
  local _GitHubFileName, _GitHubSourceURL, _GitHubUserName, _GitHubRepoName, _GitHubBranchName = _GitHubFileName or GitHubFileName, _GitHubSourceURL or GitHubSourceURL, _GitHubUserName or GitHubUserName, _GitHubRepoName or GitHubRepoName, _GitHubBranchName or GitHubBranchName
  
- if not _GitHubFileName or _GitHubFileName == "" then error("GitHubAPI: REQUIRED arg [1] - Git Hub File Name" ,0) end
+ if not _GitHubFileName or _GitHubFileName == "" then error("GitHubAPI: REQUIRED arg [1] - Git Hub File Name", 0) end
  
  local ok, data = getWebsite(_GitHubSourceURL .. "/" .. _GitHubUserName .. "/" .. _GitHubRepoName .. "/" .. _GitHubBranchName .. "/" .. _GitHubFileName)
  
