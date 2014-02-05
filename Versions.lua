@@ -1,5 +1,5 @@
 {
-  -- Programs
+  --[[ Programs ]]--
   
   --[[["server"] = {
     ["GitURL"] = "https://raw.github.com/mibac138/MNet/server.lua",
@@ -24,7 +24,7 @@
   },]] 
   
   
-  -- APIs
+  --[[ APIs ]]--
   
   ["githubapi"] = {
     ["GitURL"] = "https://raw.github.com/mibac138/APIs/GitHubAPI.lua",
