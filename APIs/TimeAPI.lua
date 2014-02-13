@@ -105,7 +105,6 @@ function getTime(str, _website, _timezone, _websiteParams)
  
  for i=1, #data do
   str = string.gsub(str, "%^"..i, tostring(data[i]))
-  --print(str)
  end
 
  return str
@@ -118,7 +117,6 @@ function string:getTime(_website, _timezone, _websiteParams)
  
  for i=1, #data do
   self = string.gsub(self, "%^"..i, tostring(data[i]))
-  --print(str)
  end
 
  return self
