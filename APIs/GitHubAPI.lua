@@ -160,7 +160,7 @@ end
 function GitHubFileDownload( _GitHubFileName, _GitHubSourceURL, _GitHubUserName, _GitHubRepoName, _GitHubBranchName)
  local _GitHubFileName, _GitHubSourceURL, _GitHubUserName, _GitHubRepoName, _GitHubBranchName = _GitHubFileName or GitHubFileName, _GitHubSourceURL or GitHubSourceURL, _GitHubUserName or GitHubUserName, _GitHubRepoName or GitHubRepoName, _GitHubBranchName or GitHubBranchName
  if type(_GitHubFileName) == "table" then
-  _GitHubFileName = _GitHubFileName["GitHubFileName"] or _GitHubFileName
+  _GitHubFileName, _GitHubSourceURL, _GitHubUserName = _GitHubFileName["GitHubFileName"] or _GitHubFileName, _GitHubFileName["GitHubSourceURL"] or _GitHubSourceURL, _GitHubFileName["GitHubUserName"] or _GitHubUserName
  end
  
  if not _GitHubFileName or _GitHubFileName == "" then error("GitHubAPI: REQUIRED arg [1] - Git Hub File Name", 0) end
